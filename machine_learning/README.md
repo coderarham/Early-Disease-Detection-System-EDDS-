@@ -2,7 +2,7 @@
 
 This folder contains all ML model training code and datasets.
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 machine_learning/
@@ -17,7 +17,7 @@ machine_learning/
 └── trained_models/     # Exported models (.onnx, .pkl)
 ```
 
-## 🚀 Training Steps
+## Training Steps
 
 ### 1. Skin Cancer Model
 - Dataset: ISIC 2019/2020
@@ -34,7 +34,7 @@ machine_learning/
 - Model: XGBoost
 - Output: `heart_disease_model.pkl`
 
-## 📦 Requirements
+## Requirements
 
 ```bash
 pip install torch torchvision
@@ -45,7 +45,7 @@ pip install onnx onnxruntime
 pip install pandas numpy matplotlib seaborn
 ```
 
-## 🎯 After Training
+## After Training
 
 Copy trained models to:
 ```

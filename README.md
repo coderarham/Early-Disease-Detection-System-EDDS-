@@ -3,7 +3,7 @@
 
 AI-powered medical diagnosis system for **Skin Cancer**, **Pneumonia**, and **Heart Disease**.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 EDDS/

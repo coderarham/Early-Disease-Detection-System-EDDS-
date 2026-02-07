@@ -9,16 +9,16 @@ ml_models = {}
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup: Load models into memory"""
-    print("🚀 Loading ML models...")
+    print("Loading ML models...")
     # Models will be loaded here after training
     ml_models["skin_model"] = None  # Placeholder
     ml_models["lung_model"] = None  # Placeholder
     ml_models["heart_model"] = None  # Placeholder
-    print("✅ Models loaded successfully")
+    print("Models loaded successfully")
     yield
     # Shutdown: Clear memory
     ml_models.clear()
-    print("🛑 Models unloaded")
+    print("Models unloaded")
 
 app = FastAPI(
     title="Early Disease Detection System (EDDS)",
