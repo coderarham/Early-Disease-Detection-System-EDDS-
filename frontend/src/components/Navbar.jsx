@@ -139,7 +139,7 @@ export default function Navbar() {
               <Link
                 to="/signup"
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-xl transition-all duration-300"
+                className="block px-4 py-3 text-white/80 hover:bg-white/10 rounded-xl transition-all duration-300"
               >
                 <div className="flex items-center gap-2">
                   <UserPlus className="w-4 h-4" />
