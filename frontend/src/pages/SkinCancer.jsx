@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Upload, Loader2, CheckCircle, AlertCircle, Image as ImageIcon } from 'lucide-react'
 import axios from 'axios'
+import API_BASE_URL from '../config'
 
 export default function SkinCancer() {
   const [image, setImage] = useState(null)
@@ -27,7 +28,7 @@ export default function SkinCancer() {
     formData.append('file', image)
 
     try {
-      const { data } = await axios.post('http://localhost:8000/api/skin/predict', formData)
+      const { data } = await axios.post(`${API_BASE_URL}/api/skin/predict`, formData)
       setResult(data)
     } catch (error) {
       console.error(error)

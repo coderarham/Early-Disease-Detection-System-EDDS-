@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Upload, Loader2, CheckCircle, AlertCircle, FileImage } from 'lucide-react'
 import axios from 'axios'
+import API_BASE_URL from '../config'
 
 export default function Pneumonia() {
   const [image, setImage] = useState(null)
@@ -27,7 +28,7 @@ export default function Pneumonia() {
     formData.append('file', image)
 
     try {
-      const { data } = await axios.post('http://localhost:8000/api/lung/predict', formData)
+      const { data } = await axios.post(`${API_BASE_URL}/api/lung/predict`, formData)
       setResult(data)
     } catch (error) {
       console.error(error)

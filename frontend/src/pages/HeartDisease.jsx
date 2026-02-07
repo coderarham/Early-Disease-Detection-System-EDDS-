@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Loader2, Activity, AlertCircle, TrendingUp, TrendingDown } from 'lucide-react'
 import axios from 'axios'
+import API_BASE_URL from '../config'
 
 export default function HeartDisease() {
   const [loading, setLoading] = useState(false)
@@ -29,7 +30,7 @@ export default function HeartDisease() {
     e.preventDefault()
     setLoading(true)
     try {
-      const { data } = await axios.post('http://localhost:8000/api/heart/predict', formData)
+      const { data } = await axios.post(`${API_BASE_URL}/api/heart/predict`, formData)
       setResult(data)
     } catch (error) {
       console.error(error)
