@@ -1,5 +1,5 @@
 # Early Disease Detection System (EDDS)
-#machine-learning #deep-learning #fastapi #react #medical-ai #healthcare #disease-detection
+
 
 AI-powered medical diagnosis system for **Skin Cancer**, **Pneumonia**, and **Heart Disease**.
 
