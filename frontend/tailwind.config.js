@@ -12,16 +12,16 @@ export default {
         accent: '#06b6d4',
       },
       fontSize: {
-        'xs': '0.8rem',
-        'sm': '0.925rem', 
-        'base': '1.05rem',
-        'lg': '1.175rem',
-        'xl': '1.3rem',
-        '2xl': '1.55rem',
-        '3xl': '1.925rem',
-        '4xl': '2.3rem',
-        '5xl': '3.05rem',
-        '6xl': '3.8rem'
+        'xs': '0.7rem',
+        'sm': '0.8rem', 
+        'base': '0.9rem',
+        'lg': '1rem',
+        'xl': '1.1rem',
+        '2xl': '1.25rem',
+        '3xl': '1.45rem',
+        '4xl': '1.75rem',
+        '5xl': '2.15rem',
+        '6xl': '2.55rem'
       }
     },
   },

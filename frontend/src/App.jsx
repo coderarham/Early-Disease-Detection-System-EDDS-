@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import SkinCancer from './pages/SkinCancer'
 import Pneumonia from './pages/Pneumonia'
@@ -18,6 +19,7 @@ function App() {
         </div>
         
         <div className="relative z-10 flex flex-col min-h-screen">
+          <ScrollToTop />
           <Navbar />
           <main className="flex-grow">
             <Routes>
