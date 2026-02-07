@@ -3,23 +3,27 @@
 
 AI-powered medical diagnosis system for **Skin Cancer**, **Pneumonia**, and **Heart Disease**.
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 EDDS/
-├── backend/          # FastAPI backend
+├── backend/              # FastAPI backend
 │   ├── app/
 │   │   ├── models/       # Trained ML models (.onnx, .pkl)
 │   │   ├── routers/      # API endpoints
 │   │   ├── services/     # Business logic
 │   │   └── schemas/      # Pydantic models
 │   └── requirements.txt
-└── frontend/         # React + Vite frontend
-    ├── src/
-    │   ├── components/
-    │   ├── pages/
-    │   └── services/
-    └── package.json
+├── frontend/             # React + Vite frontend
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── services/
+│   └── package.json
+└── machine_learning/     # ML training code
+    ├── notebooks/        # Training scripts
+    ├── datasets/         # Downloaded datasets
+    └── trained_models/   # Exported models
 ```
 
 ## Setup Instructions
