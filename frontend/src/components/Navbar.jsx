@@ -25,7 +25,7 @@ export default function Navbar() {
               <Sparkles className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1 animate-pulse" />
             </div>
             <div>
-              <span className="text-white text-2xl font-bold tracking-tight">EDDS</span>
+              <span className="text-white text-xl font-bold tracking-tight">EDDS</span>
               <p className="text-purple-300 text-xs">AI Medical Diagnosis</p>
             </div>
           </Link>

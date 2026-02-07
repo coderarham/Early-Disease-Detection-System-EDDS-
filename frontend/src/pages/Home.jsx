@@ -47,14 +47,14 @@ export default function Home() {
           <span className="text-sm text-white/80">Powered by Advanced Machine Learning</span>
         </div>
         
-        <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
           Early Disease
           <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
             Detection System
           </span>
         </h1>
         
-        <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
           Revolutionizing healthcare with AI-powered diagnosis for Skin Cancer, Pneumonia, and Heart Disease.
           Fast, accurate, and explainable medical insights at your fingertips.
         </p>
@@ -83,10 +83,10 @@ export default function Home() {
                 </div>
                 
                 <div className="mb-4">
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-white/60 transition-all">
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-white/60 transition-all">
                     {feature.title}
                   </h3>
-                  <p className="text-white/60 leading-relaxed mb-4">{feature.description}</p>
+                  <p className="text-sm text-white/60 leading-relaxed mb-4">{feature.description}</p>
                   
                   <div className="inline-flex items-center gap-2 glass px-3 py-1.5 rounded-full text-sm">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
@@ -107,17 +107,17 @@ export default function Home() {
       {/* Bottom CTA */}
       <div className="mt-20 text-center">
         <div className="glass-strong rounded-2xl p-12 max-w-4xl mx-auto border border-white/10">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Experience AI-Powered Diagnosis?</h2>
-          <p className="text-white/60 mb-8">Choose a detection module above to get started with instant medical insights</p>
+          <h2 className="text-2xl font-bold text-white mb-4">Ready to Experience AI-Powered Diagnosis?</h2>
+          <p className="text-sm text-white/60 mb-8">Choose a detection module above to get started with instant medical insights</p>
           <div className="flex items-center justify-center gap-4">
             <div className="glass px-6 py-3 rounded-xl">
               <p className="text-sm text-white/60">Trusted by</p>
-              <p className="text-2xl font-bold text-white">10,000+</p>
+              <p className="text-lg font-bold text-white">10,000+</p>
               <p className="text-sm text-white/60">Healthcare Professionals</p>
             </div>
             <div className="glass px-6 py-3 rounded-xl">
               <p className="text-sm text-white/60">Analyzed</p>
-              <p className="text-2xl font-bold text-white">500K+</p>
+              <p className="text-lg font-bold text-white">500K+</p>
               <p className="text-sm text-white/60">Medical Images</p>
             </div>
           </div>

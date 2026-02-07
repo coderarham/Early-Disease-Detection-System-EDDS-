@@ -8,7 +8,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Activity className="w-8 h-8 text-purple-400" />
+              <Activity className="w-7 h-7 text-purple-400" />
               <span className="text-white text-xl font-bold">EDDS</span>
             </div>
             <p className="text-white/60 text-sm leading-relaxed">
@@ -46,11 +46,11 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/70 text-base">
+          <p className="text-white/70 text-sm">
             © 2025 EDDS. All rights reserved.
           </p>
-          <p className="text-white/70 text-base flex items-center gap-2">
-            Developed by <span className="text-purple-400 font-bold text-lg">Md Arham</span>
+          <p className="text-white/70 text-sm flex items-center gap-2">
+            Developed by <span className="text-purple-400 font-bold text-base">Md Arham</span>
           </p>
         </div>
       </div>
