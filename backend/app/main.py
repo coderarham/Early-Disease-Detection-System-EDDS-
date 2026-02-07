@@ -30,12 +30,7 @@ app = FastAPI(
 # CORS Configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://early-disease-detection-system-edds-1.onrender.com",
-        "https://*.vercel.app",
-        "https://*.netlify.app"
-    ],
+    allow_origins=["*"],  # Allow all origins temporarily
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
