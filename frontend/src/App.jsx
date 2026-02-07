@@ -6,6 +6,9 @@ import Home from './pages/Home'
 import SkinCancer from './pages/SkinCancer'
 import Pneumonia from './pages/Pneumonia'
 import HeartDisease from './pages/HeartDisease'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import ForgotPassword from './pages/ForgotPassword'
 
 function App() {
   return (
@@ -27,6 +30,9 @@ function App() {
               <Route path="/skin" element={<SkinCancer />} />
               <Route path="/pneumonia" element={<Pneumonia />} />
               <Route path="/heart" element={<HeartDisease />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
             </Routes>
           </main>
           <Footer />

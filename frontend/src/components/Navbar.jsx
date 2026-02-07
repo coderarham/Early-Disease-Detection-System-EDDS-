@@ -1,10 +1,11 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Activity, Sparkles, Home, Menu, X } from 'lucide-react'
+import { Activity, Sparkles, Home, Menu, X, LogIn, UserPlus, User, ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Navbar() {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
+  const [authDropdown, setAuthDropdown] = useState(false)
   
   const isActive = (path) => location.pathname === path
   
@@ -31,7 +32,7 @@ export default function Navbar() {
           </Link>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-2">
+          <div className="hidden md:flex items-center space-x-2">
             {navLinks.map((link) => (
               <Link 
                 key={link.path}
@@ -52,6 +53,39 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            
+            {/* Auth Dropdown */}
+            <div className="relative ml-4">
+              <button
+                onClick={() => setAuthDropdown(!authDropdown)}
+                className="flex items-center gap-2 px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300"
+              >
+                <User className="w-4 h-4" />
+                <span>Account</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${authDropdown ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {authDropdown && (
+                <div className="absolute right-0 mt-2 w-48 glass-strong rounded-xl border border-white/10 shadow-xl">
+                  <Link
+                    to="/login"
+                    onClick={() => setAuthDropdown(false)}
+                    className="flex items-center gap-2 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-t-xl transition-all duration-300"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    Login
+                  </Link>
+                  <Link
+                    to="/signup"
+                    onClick={() => setAuthDropdown(false)}
+                    className="flex items-center gap-2 px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-b-xl transition-all duration-300"
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    Sign Up
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -89,6 +123,30 @@ export default function Navbar() {
                 </div>
               </Link>
             ))}
+            
+            {/* Mobile Auth Buttons */}
+            <div className="pt-2 border-t border-white/10 space-y-2">
+              <Link
+                to="/login"
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-3 text-white/80 hover:bg-white/10 rounded-xl transition-all duration-300"
+              >
+                <div className="flex items-center gap-2">
+                  <LogIn className="w-4 h-4" />
+                  Login
+                </div>
+              </Link>
+              <Link
+                to="/signup"
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-xl transition-all duration-300"
+              >
+                <div className="flex items-center gap-2">
+                  <UserPlus className="w-4 h-4" />
+                  Sign Up
+                </div>
+              </Link>
+            </div>
           </div>
         )}
       </div>
