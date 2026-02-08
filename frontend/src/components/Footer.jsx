@@ -11,15 +11,15 @@ export default function Footer() {
               <Activity className="w-7 h-7 text-purple-400" />
               <span className="text-white text-xl font-bold">EDDS</span>
             </div>
-            <p className="text-white/60 text-sm leading-relaxed">
+            <p className="text-white/60 text-base leading-relaxed">
               AI-powered medical diagnosis system for early detection of Skin Cancer, Pneumonia, and Heart Disease.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-white/60 text-sm">
+            <h3 className="text-white font-semibold mb-4 text-base">Quick Links</h3>
+            <ul className="space-y-2 text-white/60 text-base">
               <li><a href="/" className="hover:text-white transition">Home</a></li>
               <li><a href="/skin" className="hover:text-white transition">Skin Cancer Detection</a></li>
               <li><a href="/pneumonia" className="hover:text-white transition">Pneumonia Detection</a></li>
