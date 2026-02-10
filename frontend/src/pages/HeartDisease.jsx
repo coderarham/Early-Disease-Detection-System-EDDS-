@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { Loader2, Activity, AlertCircle, TrendingUp, TrendingDown } from 'lucide-react'
+import { Loader2, Activity, AlertCircle, TrendingUp, TrendingDown, Info } from 'lucide-react'
 import axios from 'axios'
 import API_BASE_URL from '../config'
 
 export default function HeartDisease() {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState(null)
+  const [showInfo, setShowInfo] = useState({})
   const [formData, setFormData] = useState({
     age: 50,
     sex: 1,
@@ -41,19 +42,19 @@ export default function HeartDisease() {
   }
 
   const inputFields = [
-    { name: 'age', label: 'Age', type: 'number', min: 1, max: 120 },
-    { name: 'sex', label: 'Sex', type: 'select', options: [{value: 0, label: 'Female'}, {value: 1, label: 'Male'}] },
-    { name: 'cp', label: 'Chest Pain Type', type: 'number', min: 0, max: 3 },
-    { name: 'trestbps', label: 'Resting Blood Pressure', type: 'number', min: 80, max: 200 },
-    { name: 'chol', label: 'Cholesterol (mg/dl)', type: 'number', min: 100, max: 600 },
-    { name: 'fbs', label: 'Fasting Blood Sugar', type: 'select', options: [{value: 0, label: 'Normal'}, {value: 1, label: 'High'}] },
-    { name: 'restecg', label: 'Resting ECG', type: 'number', min: 0, max: 2 },
-    { name: 'thalach', label: 'Max Heart Rate', type: 'number', min: 60, max: 220 },
-    { name: 'exang', label: 'Exercise Angina', type: 'select', options: [{value: 0, label: 'No'}, {value: 1, label: 'Yes'}] },
-    { name: 'oldpeak', label: 'ST Depression', type: 'number', min: 0, max: 10, step: 0.1 },
-    { name: 'slope', label: 'ST Slope', type: 'number', min: 0, max: 2 },
-    { name: 'ca', label: 'Major Vessels', type: 'number', min: 0, max: 4 },
-    { name: 'thal', label: 'Thalassemia', type: 'number', min: 0, max: 3 }
+    { name: 'age', label: 'Age', type: 'number', min: 1, max: 120, info: 'Patient age in years', range: '1-120 years' },
+    { name: 'sex', label: 'Sex', type: 'select', options: [{value: 0, label: 'Female'}, {value: 1, label: 'Male'}], info: 'Biological sex of patient', range: 'Male or Female' },
+    { name: 'cp', label: 'Chest Pain Type', type: 'number', min: 0, max: 10, info: 'Type of chest pain experienced', range: '0-10 (0=No pain, 10=Severe)' },
+    { name: 'trestbps', label: 'Resting Blood Pressure', type: 'number', min: 80, max: 200, info: 'Blood pressure at rest (mm Hg)', range: 'Normal: 90-120 mm Hg' },
+    { name: 'chol', label: 'Cholesterol (mg/dl)', type: 'number', min: 100, max: 600, info: 'Serum cholesterol level', range: 'Normal: <200 mg/dl' },
+    { name: 'fbs', label: 'Fasting Blood Sugar', type: 'select', options: [{value: 0, label: 'Normal'}, {value: 1, label: 'High'}], info: 'Blood sugar after fasting', range: 'Normal: <120 mg/dl' },
+    { name: 'restecg', label: 'Resting ECG', type: 'number', min: 0, max: 2, info: 'Resting electrocardiogram results', range: '0=Normal, 1=Abnormal, 2=Hypertrophy' },
+    { name: 'thalach', label: 'Max Heart Rate', type: 'number', min: 60, max: 220, info: 'Maximum heart rate achieved', range: 'Normal: 60-100 bpm at rest' },
+    { name: 'exang', label: 'Exercise Angina', type: 'select', options: [{value: 0, label: 'No'}, {value: 1, label: 'Yes'}], info: 'Chest pain during exercise', range: 'Yes or No' },
+    { name: 'oldpeak', label: 'ST Depression', type: 'number', min: 0, max: 10, step: 0.1, info: 'ST depression induced by exercise', range: 'Normal: 0-1' },
+    { name: 'slope', label: 'ST Slope', type: 'number', min: 0, max: 2, info: 'Slope of peak exercise ST segment', range: '0=Upsloping, 1=Flat, 2=Downsloping' },
+    { name: 'ca', label: 'Major Vessels', type: 'number', min: 0, max: 4, info: 'Number of major vessels colored by fluoroscopy', range: '0-4 vessels' },
+    { name: 'thal', label: 'Thalassemia', type: 'number', min: 0, max: 7, info: 'Blood disorder test result', range: '0=Normal, 3=Fixed defect, 6-7=Reversible' }
   ]
 
   return (
@@ -76,8 +77,25 @@ export default function HeartDisease() {
 
           <div className="grid md:grid-cols-2 gap-4">
             {inputFields.map((field) => (
-              <div key={field.name}>
-                <label className="text-white/70 text-sm font-medium block mb-2">{field.label}</label>
+              <div key={field.name} className="relative">
+                <div className="flex items-center gap-2 mb-2">
+                  <label className="text-white/70 text-sm font-medium">{field.label}</label>
+                  <button
+                    type="button"
+                    onClick={() => setShowInfo(prev => ({...prev, [field.name]: !prev[field.name]}))}
+                    className="text-pink-400 hover:text-pink-300 transition"
+                  >
+                    <Info className="w-4 h-4" />
+                  </button>
+                </div>
+                
+                {showInfo[field.name] && (
+                  <div className="absolute z-10 right-0 top-12 w-64 bg-white rounded-lg p-3 text-sm shadow-xl animate-in fade-in duration-200">
+                    <p className="text-gray-900 mb-2">{field.info}</p>
+                    <p className="text-pink-600 text-xs font-semibold">Range: {field.range}</p>
+                  </div>
+                )}
+                
                 {field.type === 'select' ? (
                   <select 
                     name={field.name} 
