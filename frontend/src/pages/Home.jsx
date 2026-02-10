@@ -28,7 +28,7 @@ export default function Home() {
       link: "/heart",
       color: "bg-pink-600",
       shadow: "shadow-pink-500/50",
-      stats: "94.8% Accuracy"
+      stats: "88.8% Accuracy"
     }
   ]
 
