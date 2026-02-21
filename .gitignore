@@ -4,11 +4,9 @@ __pycache__/
 *$py.class
 *.so
 .Python
-env/
 venv/
-*.egg-info/
-dist/
-build/
+env/
+ENV/
 
 # Node
 node_modules/
@@ -17,8 +15,18 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 dist/
+build/
+
+# Environment
 .env
 .env.local
+
+# Datasets (too large)
+machine_learning/datasets/
+
+# Large model files
+*.onnx.data
+*.pth
 
 # IDE
 .vscode/
@@ -29,7 +37,3 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
-
-# Datasets (too large)
-machine_learning/datasets/*/
-!machine_learning/datasets/.gitkeep

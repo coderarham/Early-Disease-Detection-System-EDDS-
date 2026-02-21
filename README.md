@@ -110,7 +110,7 @@ Frontend will be available at: `http://localhost:5173`
 ##  Next Steps
 
 1. Download datasets
-2. Train models in Jupyter notebooks
+2. Train models in Google colab notebooks
 3. Export models to ONNX/pickle format
 4. Place models in `backend/app/models/`
 5. Update inference code in services

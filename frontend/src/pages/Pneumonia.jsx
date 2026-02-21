@@ -99,6 +99,14 @@ export default function Pneumonia() {
               <CheckCircle className="w-8 h-8 text-green-400" />
               <h3 className="text-2xl font-bold text-white">Diagnosis Complete</h3>
             </div>
+
+            <div className="flex items-start gap-3 glass p-4 rounded-xl border border-yellow-500/30 bg-yellow-500/5 mb-6">
+              <AlertCircle className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-medium text-yellow-400 mb-1">⚠️ Important Disclaimer</p>
+                <p className="text-sm text-white/70">I am an AI, not a real Doctor or Radiologist. I only analyze image patterns. For actual medical condition and treatment, always trust a qualified doctor's report.</p>
+              </div>
+            </div>
             
             <div className="space-y-4">
               <div className="glass p-6 rounded-xl">
@@ -119,17 +127,85 @@ export default function Pneumonia() {
                 </div>
               </div>
 
-              {result.details?.heatmap_available === false && (
+              {result.heatmap && (
                 <div className="glass p-6 rounded-xl">
                   <span className="text-white/60 text-sm uppercase tracking-wide mb-3 block">Grad-CAM Heatmap</span>
-                  <p className="text-white/50 text-sm">Heatmap visualization will be available after model training</p>
+                  <img src={result.heatmap} alt="Heatmap" className="rounded-xl w-full shadow-lg" />
+                  <p className="text-white/50 text-xs mt-3">Red areas indicate regions of interest for diagnosis</p>
                 </div>
               )}
 
-              {result.details?.message && (
-                <div className="flex items-start gap-3 glass p-4 rounded-xl border border-yellow-500/30">
-                  <AlertCircle className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-yellow-300">{result.details.message}</p>
+              {result.probabilities && (
+                <div className="glass p-6 rounded-xl">
+                  <span className="text-white/60 text-sm uppercase tracking-wide mb-4 block">Class Probabilities</span>
+                  <div className="space-y-3">
+                    {Object.entries(result.probabilities).map(([key, value]) => (
+                      <div key={key}>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span className="text-white/80">{key}</span>
+                          <span className="text-white font-medium">{(value * 100).toFixed(1)}%</span>
+                        </div>
+                        <div className="w-full bg-white/10 rounded-full h-2">
+                          <div 
+                            className="bg-gradient-to-r from-blue-500 to-cyan-500 h-full rounded-full"
+                            style={{ width: `${value * 100}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {result.recommendation && (
+                <div className="flex items-start gap-3 glass p-4 rounded-xl border border-blue-500/30">
+                  <AlertCircle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-white mb-1">Recommendation</p>
+                    <p className="text-sm text-white/70">{result.recommendation}</p>
+                  </div>
+                </div>
+              )}
+
+              {result.detailed_analysis && (
+                <div className="glass p-6 rounded-xl border border-purple-500/30">
+                  <span className="text-white/60 text-sm uppercase tracking-wide mb-4 block">Detailed Analysis</span>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-white font-medium mb-2">Findings:</p>
+                      <ul className="space-y-2">
+                        {result.detailed_analysis.findings.map((finding, idx) => (
+                          <li key={idx} className="text-white/70 text-sm flex items-start gap-2">
+                            <span className="text-purple-400 mt-1">•</span>
+                            <span>{finding}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <p className="text-white font-medium mb-2">Severity: 
+                        <span className={`ml-2 ${
+                          result.detailed_analysis.severity === 'Normal' ? 'text-green-400' :
+                          result.detailed_analysis.severity.includes('Mild') ? 'text-yellow-400' :
+                          'text-red-400'
+                        }`}>{result.detailed_analysis.severity}</span>
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-white font-medium mb-2">Next Steps:</p>
+                      <ul className="space-y-2">
+                        {result.detailed_analysis.next_steps.map((step, idx) => (
+                          <li key={idx} className="text-white/70 text-sm flex items-start gap-2">
+                            <span className="text-cyan-400 mt-1">→</span>
+                            <span>{step}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
