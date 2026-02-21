@@ -37,8 +37,12 @@ async def process_skin_image(image: Image.Image):
 MODEL_PATH = Path("app/models/pneumonia_model.onnx")
 PNEUMONIA_SESSION = None
 
-if MODEL_PATH.exists():
-    PNEUMONIA_SESSION = ort.InferenceSession(str(MODEL_PATH))
+try:
+    if MODEL_PATH.exists():
+        PNEUMONIA_SESSION = ort.InferenceSession(str(MODEL_PATH))
+except Exception as e:
+    print(f"Warning: Could not load pneumonia model: {e}")
+    PNEUMONIA_SESSION = None
 
 def generate_gradcam(image_array, prediction):
     """Generate Grad-CAM heatmap"""
