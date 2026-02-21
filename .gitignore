@@ -25,7 +25,6 @@ build/
 machine_learning/datasets/
 
 # Large model files
-*.onnx.data
 *.pth
 
 # IDE
