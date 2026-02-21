@@ -60,6 +60,35 @@ def generate_gradcam(image_array, prediction):
 async def process_lung_image(image: Image.Image):
     """Preprocess and predict pneumonia with Grad-CAM"""
     def _inference():
+        # Validate if image looks like X-ray (grayscale or low color variance)
+        img_rgb = image.convert('RGB')
+        img_array_check = np.array(img_rgb)
+        
+        # Check if image is mostly grayscale (X-rays are grayscale)
+        r, g, b = img_array_check[:,:,0], img_array_check[:,:,1], img_array_check[:,:,2]
+        
+        # Calculate color difference - X-rays have very similar RGB values
+        color_diff = np.mean(np.abs(r - g)) + np.mean(np.abs(g - b)) + np.mean(np.abs(r - b))
+        
+        # If color difference is high, it's not an X-ray
+        if color_diff > 15:
+            return {
+                "success": False,
+                "error": "⚠️ Invalid Image: Please upload a chest X-ray (grayscale medical image only)",
+                "prediction": "Invalid Input",
+                "confidence": 0.0
+            }
+        
+        # Check brightness - X-rays have specific brightness range
+        avg_brightness = np.mean(img_array_check)
+        if avg_brightness < 30 or avg_brightness > 230:
+            return {
+                "success": False,
+                "error": "⚠️ Invalid Image: Image too dark or too bright. Please upload a proper chest X-ray.",
+                "prediction": "Invalid Input",
+                "confidence": 0.0
+            }
+        
         # Preprocess
         img = image.convert('RGB').resize((224, 224))
         img_array = np.array(img, dtype=np.float32)
