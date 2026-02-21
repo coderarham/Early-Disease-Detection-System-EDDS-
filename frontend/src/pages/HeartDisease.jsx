@@ -60,22 +60,22 @@ export default function HeartDisease() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-white mb-4">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-white mb-3">
           Heart Disease <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">Risk Assessment</span>
         </h1>
-        <p className="text-white/60 text-lg">Enter patient vitals for AI-powered cardiovascular risk prediction</p>
+        <p className="text-white/60">Enter patient vitals for AI-powered cardiovascular risk prediction</p>
       </div>
       
       <div className="grid lg:grid-cols-5 gap-8">
         {/* Form Section */}
-        <form onSubmit={handleSubmit} className="lg:col-span-3 glass-strong rounded-2xl p-8 border border-white/10 space-y-6">
-          <div className="flex items-center gap-3 mb-6">
-            <Activity className="w-6 h-6 text-pink-400" />
-            <h3 className="text-xl font-bold text-white">Patient Information</h3>
+        <form onSubmit={handleSubmit} className="lg:col-span-3 glass-strong rounded-2xl p-6 border border-white/10 space-y-4">
+          <div className="flex items-center gap-2 mb-4">
+            <Activity className="w-5 h-5 text-pink-400" />
+            <h3 className="text-lg font-bold text-white">Patient Information</h3>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-3">
             {inputFields.map((field) => (
               <div key={field.name} className="relative">
                 <div className="flex items-center gap-2 mb-2">
@@ -101,7 +101,7 @@ export default function HeartDisease() {
                     name={field.name} 
                     value={formData[field.name]} 
                     onChange={handleChange}
-                    className="w-full glass text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
+                    className="w-full glass text-white rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
                   >
                     {field.options.map(opt => (
                       <option key={opt.value} value={opt.value} className="bg-gray-900">{opt.label}</option>
@@ -116,7 +116,7 @@ export default function HeartDisease() {
                     min={field.min}
                     max={field.max}
                     step={field.step || 1}
-                    className="w-full glass text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
+                    className="w-full glass text-white rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
                   />
                 )}
               </div>
@@ -126,7 +126,7 @@ export default function HeartDisease() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-pink-500 to-rose-600 text-white py-4 rounded-xl font-semibold hover:shadow-xl hover:shadow-pink-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-8"
+            className="w-full bg-gradient-to-r from-pink-500 to-rose-600 text-white py-3 rounded-xl font-semibold hover:shadow-xl hover:shadow-pink-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-6"
           >
             {loading ? (
               <>
@@ -141,21 +141,21 @@ export default function HeartDisease() {
 
         {/* Results Section */}
         {result ? (
-          <div className="lg:col-span-2 space-y-6">
-            <div className="glass-strong rounded-2xl p-8 border border-white/10 animate-in fade-in duration-500">
-              <h3 className="text-2xl font-bold text-white mb-6">Risk Assessment</h3>
+          <div className="lg:col-span-2 space-y-4">
+            <div className="glass-strong rounded-2xl p-6 border border-white/10 animate-in fade-in duration-500">
+              <h3 className="text-xl font-bold text-white mb-4">Risk Assessment</h3>
               
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {/* Risk Level */}
-                <div className="glass p-6 rounded-xl text-center">
-                  <span className="text-white/60 text-sm uppercase tracking-wide block mb-3">Risk Level</span>
-                  <div className="flex items-center justify-center gap-2 mb-2">
+                <div className="glass p-4 rounded-xl text-center">
+                  <span className="text-white/60 text-xs uppercase tracking-wide block mb-2">Risk Level</span>
+                  <div className="flex items-center justify-center gap-2 mb-1">
                     {result.prediction === 'Low Risk' ? (
-                      <TrendingDown className="w-8 h-8 text-green-400" />
+                      <TrendingDown className="w-6 h-6 text-green-400" />
                     ) : (
-                      <TrendingUp className="w-8 h-8 text-red-400" />
+                      <TrendingUp className="w-6 h-6 text-red-400" />
                     )}
-                    <p className={`text-3xl font-bold ${
+                    <p className={`text-2xl font-bold ${
                       result.prediction === 'Low Risk' ? 'text-green-400' : 'text-red-400'
                     }`}>
                       {result.prediction}
@@ -164,10 +164,10 @@ export default function HeartDisease() {
                 </div>
 
                 {/* Risk Percentage */}
-                <div className="glass p-6 rounded-xl">
-                  <span className="text-white/60 text-sm uppercase tracking-wide block mb-3">Risk Score</span>
-                  <p className="text-4xl font-bold text-white mb-4">{result.details?.risk_percentage}%</p>
-                  <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden">
+                <div className="glass p-4 rounded-xl">
+                  <span className="text-white/60 text-xs uppercase tracking-wide block mb-2">Risk Score</span>
+                  <p className="text-3xl font-bold text-white mb-3">{result.details?.risk_percentage}%</p>
+                  <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
                     <div 
                       className={`h-full rounded-full transition-all duration-1000 ${
                         result.details?.risk_percentage > 50 
@@ -181,9 +181,9 @@ export default function HeartDisease() {
 
                 {/* Top Risk Factors */}
                 {result.details?.top_risk_factors && (
-                  <div className="glass p-6 rounded-xl">
-                    <span className="text-white/60 text-sm uppercase tracking-wide block mb-4">Key Risk Factors</span>
-                    <div className="space-y-2">
+                  <div className="glass p-4 rounded-xl">
+                    <span className="text-white/60 text-xs uppercase tracking-wide block mb-3">Key Risk Factors</span>
+                    <div className="space-y-1.5">
                       {result.details.top_risk_factors.map((factor, idx) => (
                         <div key={idx} className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
@@ -195,7 +195,7 @@ export default function HeartDisease() {
                 )}
 
                 {result.details?.message && (
-                  <div className="flex items-start gap-3 glass p-4 rounded-xl border border-yellow-500/30">
+                  <div className="flex items-start gap-2 glass p-3 rounded-xl border border-yellow-500/30">
                     <AlertCircle className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
                     <p className="text-sm text-yellow-300">{result.details.message}</p>
                   </div>
