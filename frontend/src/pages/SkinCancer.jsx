@@ -171,7 +171,7 @@ export default function SkinCancer() {
                               >
                                 <Info className="w-4 h-4 text-pink-400 hover:text-pink-300 cursor-help transition-colors" />
                                 {hoveredClass === key && (
-                                  <div className={`absolute ${isLastTwo ? 'left-6 bottom-0' : 'left-6 top-0'} z-50 w-64 bg-gray-900 border border-white/20 rounded-lg p-3 shadow-2xl`}>
+                                  <div className={`fixed sm:absolute ${isLastTwo ? 'sm:left-6 sm:bottom-0' : 'sm:left-6 sm:top-0'} left-4 right-4 sm:left-auto sm:right-auto top-1/2 sm:top-auto -translate-y-1/2 sm:translate-y-0 z-50 sm:w-64 bg-gray-900 border border-white/20 rounded-lg p-3 shadow-2xl`}>
                                     <p className="text-xs text-white/90 leading-relaxed">
                                       {CLASS_DEFINITIONS[key]}
                                     </p>
