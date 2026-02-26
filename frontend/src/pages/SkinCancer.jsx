@@ -1,14 +1,26 @@
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { Upload, Loader2, CheckCircle, AlertCircle, Image as ImageIcon } from 'lucide-react'
+import { Upload, Loader2, CheckCircle, AlertCircle, Image as ImageIcon, Info } from 'lucide-react'
 import axios from 'axios'
 import API_BASE_URL from '../config'
+
+const CLASS_DEFINITIONS = {
+  "Melanoma": "The most dangerous and aggressive type of skin cancer. It develops in melanocytes (pigment-producing cells) and can spread rapidly to other parts of the body if not treated early.",
+  "Nevus": "A common benign mole (melanocytic nevus). These are normal skin growths that are usually harmless, though they should be monitored for changes in size, shape, or color.",
+  "Basal Cell Carcinoma": "The most common type of skin cancer. It develops in the basal cells of the skin and is usually caused by prolonged sun exposure. It grows slowly and rarely spreads to other parts of the body.",
+  "Actinic Keratosis": "A pre-cancerous skin condition caused by sun damage. While not cancer itself, it can develop into Squamous Cell Carcinoma if left untreated. Appears as rough, scaly patches on sun-exposed skin.",
+  "Benign Keratosis": "A harmless, non-cancerous skin growth that commonly appears with age. Also known as seborrheic keratosis, these are completely safe and do not require treatment unless they cause discomfort.",
+  "Dermatofibroma": "A benign (harmless) fibrous nodule that forms in the skin. It appears as a small, firm bump and is completely safe. Common in adults and usually doesn't require treatment.",
+  "Vascular Lesion": "Benign growths formed by clusters of blood vessels. Examples include birthmarks, cherry angiomas, and spider veins. These are harmless and typically don't require medical intervention.",
+  "Squamous Cell Carcinoma": "The second most common type of skin cancer. It develops in the squamous cells of the skin's upper layer and is often caused by UV exposure. It can spread if not treated but is usually curable when caught early."
+}
 
 export default function SkinCancer() {
   const [image, setImage] = useState(null)
   const [preview, setPreview] = useState(null)
   const [result, setResult] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [hoveredClass, setHoveredClass] = useState(null)
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { 'image/*': ['.jpeg', '.jpg', '.png'] },
@@ -119,24 +131,80 @@ export default function SkinCancer() {
                 </div>
               </div>
 
-              {result.details?.probabilities && (
+              {result.severity && (
                 <div className="glass p-4 rounded-xl">
-                  <span className="text-white/60 text-xs uppercase tracking-wide mb-3 block">Class Probabilities</span>
+                  <span className="text-white/60 text-xs uppercase tracking-wide">Severity</span>
+                  <p className="text-xl font-bold text-white mt-1">{result.severity}</p>
+                </div>
+              )}
+
+              {result.type && (
+                <div className="glass p-4 rounded-xl">
+                  <span className="text-white/60 text-xs uppercase tracking-wide">Type</span>
+                  <p className="text-xl font-bold text-white mt-1">
+                    {result.type}
+                    <span className="font-bold text-base ml-2">
+                      / {result.type === 'Malignant' ? 'Cancerous' : result.type === 'Benign' ? 'Non-Cancerous' : 'May Become Cancer'}
+                    </span>
+                  </p>
+                </div>
+              )}
+
+              {result.probabilities && (
+                <div className="glass p-4 rounded-xl">
+                  <span className="text-white/60 text-xs uppercase tracking-wide mb-3 block">Detailed Probabilities</span>
                   <div className="space-y-2">
-                    {Object.entries(result.details.probabilities).map(([key, value]) => (
-                      <div key={key} className="flex justify-between items-center">
-                        <span className="text-white/80 text-sm">{key}</span>
-                        <span className="text-white font-semibold">{(value * 100).toFixed(1)}%</span>
-                      </div>
-                    ))}
+                    {Object.entries(result.probabilities)
+                      .sort(([, a], [, b]) => b - a)
+                      .map(([key, value], index) => {
+                        const totalItems = Object.entries(result.probabilities).length
+                        const isLastTwo = index >= totalItems - 2
+                        
+                        return (
+                          <div key={key} className="flex justify-between items-center group relative">
+                            <div className="flex items-center gap-2">
+                              <span className="text-white/80 text-sm">{key}</span>
+                              <div 
+                                className="relative"
+                                onMouseEnter={() => setHoveredClass(key)}
+                                onMouseLeave={() => setHoveredClass(null)}
+                              >
+                                <Info className="w-4 h-4 text-pink-400 hover:text-pink-300 cursor-help transition-colors" />
+                                {hoveredClass === key && (
+                                  <div className={`absolute ${isLastTwo ? 'left-6 bottom-0' : 'left-6 top-0'} z-50 w-64 bg-gray-900 border border-white/20 rounded-lg p-3 shadow-2xl`}>
+                                    <p className="text-xs text-white/90 leading-relaxed">
+                                      {CLASS_DEFINITIONS[key]}
+                                    </p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <span className="text-white font-semibold">{(value * 100).toFixed(2)}%</span>
+                          </div>
+                        )
+                      })}
                   </div>
                 </div>
               )}
 
-              {result.details?.message && (
-                <div className="flex items-start gap-2 glass p-3 rounded-xl border border-yellow-500/30">
-                  <AlertCircle className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-yellow-300">{result.details.message}</p>
+              {result.recommendation && (
+                <div className="glass p-4 rounded-xl border border-orange-500/30">
+                  <span className="text-white/60 text-xs uppercase tracking-wide mb-2 block">Recommendation</span>
+                  <p className="text-white text-sm">{result.recommendation}</p>
+                </div>
+              )}
+
+              {result.next_steps && (
+                <div className="glass p-4 rounded-xl">
+                  <span className="text-white/60 text-xs uppercase tracking-wide mb-3 block">Next Steps</span>
+                  <ul className="space-y-2">
+                    {result.next_steps.map((step, idx) => (
+                      <li key={idx} className="text-white/80 text-sm flex items-start gap-2">
+                        <span className="text-orange-400 mt-1">•</span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
             </div>
