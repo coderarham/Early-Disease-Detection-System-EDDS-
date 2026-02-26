@@ -111,11 +111,6 @@ export default function Home() {
           <p className="text-sm text-white/60 mb-8">Choose a detection module above to get started with instant medical insights</p>
           <div className="flex items-center justify-center gap-4">
             <div className="glass px-6 py-3 rounded-xl">
-              <p className="text-sm text-white/60">Trusted by</p>
-              <p className="text-lg font-bold text-white">10,000+</p>
-              <p className="text-sm text-white/60">Healthcare Professionals</p>
-            </div>
-            <div className="glass px-6 py-3 rounded-xl">
               <p className="text-sm text-white/60">Analyzed</p>
               <p className="text-lg font-bold text-white">500K+</p>
               <p className="text-sm text-white/60">Medical Images</p>
