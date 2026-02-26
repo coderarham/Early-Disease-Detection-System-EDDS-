@@ -13,7 +13,8 @@ export default function Navbar() {
     { path: '/', label: 'Home', icon: Home },
     { path: '/skin', label: 'Skin Cancer' },
     { path: '/pneumonia', label: 'Pneumonia' },
-    { path: '/heart', label: 'Heart Disease' }
+    { path: '/heart', label: 'Heart Disease' },
+    { path: '/about', label: 'About Us' }
   ]
   
   return (

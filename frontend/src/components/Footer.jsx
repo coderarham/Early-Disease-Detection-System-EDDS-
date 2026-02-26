@@ -21,9 +21,9 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4 text-base">Quick Links</h3>
             <ul className="space-y-2 text-white/60 text-base">
               <li><a href="/" className="hover:text-white transition">Home</a></li>
-              <li><a href="/skin" className="hover:text-white transition">Skin Cancer Detection</a></li>
-              <li><a href="/pneumonia" className="hover:text-white transition">Pneumonia Detection</a></li>
-              <li><a href="/heart" className="hover:text-white transition">Heart Disease Prediction</a></li>
+              <li><a href="/about" className="hover:text-white transition">About Us</a></li>
+              <li><a href="/terms" className="hover:text-white transition">Terms & Conditions</a></li>
+              <li><a href="/privacy" className="hover:text-white transition">Privacy Policy</a></li>
             </ul>
           </div>
 
@@ -31,13 +31,13 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Connect</h3>
             <div className="flex gap-4">
-              <a href="#" className="glass p-3 rounded-lg hover:bg-white/20 transition">
+              <a href="https://github.com/coderarham/Early-Disease-Detection-System-EDDS-" target="_blank" rel="noopener noreferrer" className="glass p-3 rounded-lg hover:bg-white/20 transition">
                 <Github className="w-5 h-5 text-white/80" />
               </a>
-              <a href="#" className="glass p-3 rounded-lg hover:bg-white/20 transition">
+              <a href="https://www.linkedin.com/in/md-arham-47aa6b241/" target="_blank" rel="noopener noreferrer" className="glass p-3 rounded-lg hover:bg-white/20 transition">
                 <Linkedin className="w-5 h-5 text-white/80" />
               </a>
-              <a href="#" className="glass p-3 rounded-lg hover:bg-white/20 transition">
+              <a href="mailto:mdarham1749@gmail.com" className="glass p-3 rounded-lg hover:bg-white/20 transition">
                 <Mail className="w-5 h-5 text-white/80" />
               </a>
             </div>
