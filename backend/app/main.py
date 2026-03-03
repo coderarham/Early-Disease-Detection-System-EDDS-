@@ -46,6 +46,7 @@ async def root():
     return {"message": "EDDS API is running", "status": "healthy"}
 
 @app.get("/health")
+@app.head("/health")
 async def health_check():
     return {
         "status": "ok",
